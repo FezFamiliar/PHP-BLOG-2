@@ -9,14 +9,11 @@ if(isset($_GET['logout'])){
 }
 include 'header.php';
 $page = 3;
-if(isset($_GET['add']) && $_GET['add'] == 'true'): 
+if(isset($_GET['comment']) && $_GET['comment'] == 'true'): 
     if(isset($_SESSION['username']) == false): ?>
     <script type="text/javascript">alert('You need to sign in!');</script>
         <?else: ?>                   
           <form action="" method="POST" autocomplete="off" class="comment-form">
-          <br>
-          Titlu:
-          <input type="text" name="titlu" class="form-control">
           <br>
           Mesaj:
           <textarea class="form-control" rows="3" name="msg">
@@ -24,7 +21,7 @@ if(isset($_GET['add']) && $_GET['add'] == 'true'):
 
           </textarea>
           <br>
-          <input type="submit" value="Salveaza" class="btn btn-primary submit">
+          <input type="submit" value="Comenteaza!" class="btn btn-primary submit">
         </form>
 
           
@@ -64,7 +61,7 @@ if(isset($_GET['category_id'])){
 include 'menu.php';
 
    if(isset($_GET['category_id'])): ?>
-     <a href="<?= $_SERVER['REQUEST_URI']; ?>&add=true" class="addpost">Adaugati o postare!</a>
+     
        <section class="container">
            <? 
            if($rowcount > 0):
@@ -75,9 +72,9 @@ include 'menu.php';
                   <p>Message: <?= $row['message']; ?></p>
                   <p style="float:right;"><?= $row['user_who_posted'] . "<br> " .$row['posted']; ?></p>
                   <br>
-  
+                  <a href="<?= $_SERVER['REQUEST_URI']; ?>&comment=true" class="addpost">Adaugati un comentariu!</a>
                 </div> 
-           <? endwhile;else: echo "Nu aveti nicio postare!";endif;?>
+           <? endwhile;else: echo "Nu este nicio postare!";endif;?>
            
               
                 
