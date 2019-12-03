@@ -8,7 +8,7 @@ if(isset($_GET['logout'])){
   header("refresh:0;url=index.php");
 }
 include 'header.php';
-$page = 3;
+$page = 1;
 if(isset($_GET['category_id'])){
 
   $max_query = mysqli_query($conn,"SELECT count(id) FROM posts WHERE category_id = '".$_GET['category_id']."'");
@@ -83,7 +83,7 @@ include 'menu.php';
                   <?
                     $query_comm = mysqli_query($conn,"SELECT * FROM `comments` WHERE post_id = '".$row['id']."'"); 
                     while($row_c = mysqli_fetch_array($query_comm)): ?>
-                    <p><?= $row_c['comment'] . " - " . $row_c['who_comment'];?></p>
+                    <p><?= $row_c['who_comment'] . " : " . $row_c['comment'];?></p>
                   <? endwhile;?>
                 </div> 
            <? endwhile;else: echo "Nu este nicio postare!";endif;?>

@@ -43,6 +43,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['action']) && $_GET['acti
 if(isset($_GET['action']) && $_GET['action'] == 'remove'){
 
   $query = "DELETE FROM `posts` WHERE id = '".$_GET['edit_id']."'";
+  //echo $query;
   mysqli_query($conn,$query);
   //  header("refresh:0;posts.php");
 }
@@ -127,7 +128,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'remove'){
        <tr>
          <td><?= $row['id']; ?></td>
          <td><?= $row['title']; ?></td>
-         <td style="width:30% !important"><?= $row['message']; ?></td>
+         <td><?= $row['message']; ?></td>
          <td><?= $row_j['name']; ?></td>
          <td>
           <i class="fas fa-pencil-alt" onclick="window.location='posts.php?page=<? echo $_GET['page']; ?>&edit_id=<? echo $row['id']; ?>&action=edit'"></i>

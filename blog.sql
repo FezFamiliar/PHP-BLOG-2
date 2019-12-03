@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gazdă: 127.0.0.1
--- Timp de generare: dec. 03, 2019 la 05:15 PM
+-- Timp de generare: dec. 03, 2019 la 05:32 PM
 -- Versiune server: 10.4.8-MariaDB
 -- Versiune PHP: 7.1.33
 
@@ -42,7 +42,7 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 (2, 'Impozite'),
 (3, 'Taxe'),
 (4, 'Curs Valutar'),
-(5, 'Credite');
+(9, 'Credite');
 
 -- --------------------------------------------------------
 
@@ -63,9 +63,8 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `post_id`, `comment`, `commented`, `who_comment`) VALUES
-(14, 29, 'Foarte fain frate!', '2019-12-03 08:13:21', 'Aarnduke'),
-(15, 29, 'this is obnoxious!   \r\n          ', '2019-12-03 08:14:02', 'trump'),
-(16, 31, '            \r\n     fffff    ', '2019-12-03 08:14:30', 'trump');
+(1, 29, 'ffff  ', '2019-12-03 08:31:09', 'Aarnduke'),
+(2, 29, 'almos vagyok emer            \r\n          ', '2019-12-03 08:31:37', 'almos');
 
 -- --------------------------------------------------------
 
@@ -91,8 +90,7 @@ CREATE TABLE `posts` (
 INSERT INTO `posts` (`id`, `user_who_posted`, `category_id`, `title`, `message`, `posted`, `comment_`, `who_comment`) VALUES
 (27, 'admin', 3, 'fffff', 'fffffffff', '2019-12-03 06:42:42', 'ffff', 'peterke'),
 (29, 'admin', 4, 'euro moare', 'moare rau', '2019-12-03 06:43:49', 'nagyon szep igazan\r\n            \r\n          ', 'peterke'),
-(30, 'admin', 4, 'ff', 'fff', '2019-12-03 06:46:57', '', ''),
-(31, 'admin', 4, 'eee', 'eeeeee', '2019-12-03 06:49:57', 'foarte frumos', 'Aarnduke');
+(32, 'admin', 4, 'A svajci frank a legmenobb!', 'Mindenki tudja hogy a svajci frank nagyon jo', '2019-12-03 08:32:13', '', '');
 
 -- --------------------------------------------------------
 
@@ -117,7 +115,7 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `joined`) VALUES
 (22, 'peter', 'peter@yahoo.com', 'f08e2a44ff938ba1fee15597f59e11eb', '2019-12-03 04:24:56'),
 (23, 'trump', 'trump@yahoo.com', '6ad5d29de368db3dcf6f9d8e133a223a', '2019-12-03 04:48:53'),
 (26, 'peterke', 'peterke@yahoo.com', '83878c91171338902e0fe0fb97a8c47a', '2019-12-03 07:45:21'),
-(27, 'trump', 'trump@Yahoo.com', 'a643249416814e8185957c158ec2c169', '2019-12-03 08:13:49');
+(28, 'almos', 'almos@yahoo.com', '6f8f57715090da2632453988d9a1501b', '2019-12-03 08:31:29');
 
 --
 -- Indexuri pentru tabele eliminate
@@ -157,25 +155,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pentru tabele `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pentru tabele `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pentru tabele `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT pentru tabele `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Constrângeri pentru tabele eliminate
@@ -185,7 +183,7 @@ ALTER TABLE `users`
 -- Constrângeri pentru tabele `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`);
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE;
 
 --
 -- Constrângeri pentru tabele `posts`
