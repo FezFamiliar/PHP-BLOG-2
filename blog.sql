@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gazdă: 127.0.0.1
--- Timp de generare: dec. 03, 2019 la 03:13 PM
+-- Timp de generare: dec. 03, 2019 la 05:15 PM
 -- Versiune server: 10.4.8-MariaDB
 -- Versiune PHP: 7.1.33
 
@@ -47,6 +47,29 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structură tabel pentru tabel `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(6) NOT NULL,
+  `post_id` int(6) NOT NULL,
+  `comment` text NOT NULL,
+  `commented` datetime NOT NULL,
+  `who_comment` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Eliminarea datelor din tabel `comments`
+--
+
+INSERT INTO `comments` (`id`, `post_id`, `comment`, `commented`, `who_comment`) VALUES
+(14, 29, 'Foarte fain frate!', '2019-12-03 08:13:21', 'Aarnduke'),
+(15, 29, 'this is obnoxious!   \r\n          ', '2019-12-03 08:14:02', 'trump'),
+(16, 31, '            \r\n     fffff    ', '2019-12-03 08:14:30', 'trump');
+
+-- --------------------------------------------------------
+
+--
 -- Structură tabel pentru tabel `posts`
 --
 
@@ -56,31 +79,20 @@ CREATE TABLE `posts` (
   `category_id` int(6) NOT NULL,
   `title` text NOT NULL,
   `message` text NOT NULL,
-  `posted` datetime NOT NULL
+  `posted` datetime NOT NULL,
+  `comment_` text NOT NULL,
+  `who_comment` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Eliminarea datelor din tabel `posts`
 --
 
-INSERT INTO `posts` (`id`, `user_who_posted`, `category_id`, `title`, `message`, `posted`) VALUES
-(1, 'peter', 1, 'F', '            \r\nF\r\n          ', '2019-12-03 04:29:17'),
-(2, 'peter', 1, 'F', '            \r\nF\r\n          ', '2019-12-03 04:29:29'),
-(3, 'Aarnduke', 1, 'f', '            fffff\r\n\r\n          ', '2019-12-03 04:29:54'),
-(4, 'Aarnduke', 1, 'g', '            \r\ng\r\n          ', '2019-12-03 04:41:58'),
-(5, 'trump', 1, 'TRUMP', 'trump            \r\n\r\n          ', '2019-12-03 04:49:02'),
-(6, 'trump', 1, 'ggggg', 'ggggg\r\n\r\n          ', '2019-12-03 04:49:12'),
-(7, 'trump', 1, 'ffff', 'fffffffff\r\n\r\n          ', '2019-12-03 04:49:25'),
-(9, 'Aarnduke', 4, 'a', '            \r\n\r\n          a', '2019-12-03 05:13:39'),
-(13, 'Aarnduke', 4, 'title', 'mesag            \r\n\r\n          ', '2019-12-03 05:27:53'),
-(14, 'Aarnduke', 4, 'dfdffdfd', '            dfdfdfdfddddddddddddddddddddddddddddddddddddddddddddddddddd\r\n\r\n          ', '2019-12-03 05:28:03'),
-(17, 'admin', 3, 'this is a message by admin', 'admin wwas here', '2019-12-03 05:36:31'),
-(19, 'Aarnduke', 1, 'ff', '            \r\nff\r\n          ', '2019-12-03 05:50:11'),
-(20, 'georgina', 5, 'ff', '            \r\nffff\r\n          ', '2019-12-03 05:54:05'),
-(21, 'georgina', 5, 'h', 'h', '2019-12-03 05:54:50'),
-(22, 'georgina', 5, 'h', 'h', '2019-12-03 05:55:59'),
-(23, 'georgina', 5, 'h', 'h', '2019-12-03 05:56:01'),
-(24, 'georgina', 5, 'h', 'h', '2019-12-03 05:57:05');
+INSERT INTO `posts` (`id`, `user_who_posted`, `category_id`, `title`, `message`, `posted`, `comment_`, `who_comment`) VALUES
+(27, 'admin', 3, 'fffff', 'fffffffff', '2019-12-03 06:42:42', 'ffff', 'peterke'),
+(29, 'admin', 4, 'euro moare', 'moare rau', '2019-12-03 06:43:49', 'nagyon szep igazan\r\n            \r\n          ', 'peterke'),
+(30, 'admin', 4, 'ff', 'fff', '2019-12-03 06:46:57', '', ''),
+(31, 'admin', 4, 'eee', 'eeeeee', '2019-12-03 06:49:57', 'foarte frumos', 'Aarnduke');
 
 -- --------------------------------------------------------
 
@@ -104,7 +116,8 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `joined`) VALUES
 (1, 'aarnduke', 'arrnduke@yahoo.com', 'a643249416814e8185957c158ec2c169', '2019-12-03 03:39:38'),
 (22, 'peter', 'peter@yahoo.com', 'f08e2a44ff938ba1fee15597f59e11eb', '2019-12-03 04:24:56'),
 (23, 'trump', 'trump@yahoo.com', '6ad5d29de368db3dcf6f9d8e133a223a', '2019-12-03 04:48:53'),
-(25, 'georgina', 'georgina@yahoo.com', 'a643249416814e8185957c158ec2c169', '2019-12-03 05:53:47');
+(26, 'peterke', 'peterke@yahoo.com', '83878c91171338902e0fe0fb97a8c47a', '2019-12-03 07:45:21'),
+(27, 'trump', 'trump@Yahoo.com', 'a643249416814e8185957c158ec2c169', '2019-12-03 08:13:49');
 
 --
 -- Indexuri pentru tabele eliminate
@@ -115,6 +128,13 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `joined`) VALUES
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexuri pentru tabele `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `post_id` (`post_id`);
 
 --
 -- Indexuri pentru tabele `posts`
@@ -140,20 +160,32 @@ ALTER TABLE `categories`
   MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT pentru tabele `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
 -- AUTO_INCREMENT pentru tabele `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT pentru tabele `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constrângeri pentru tabele eliminate
 --
+
+--
+-- Constrângeri pentru tabele `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`);
 
 --
 -- Constrângeri pentru tabele `posts`
