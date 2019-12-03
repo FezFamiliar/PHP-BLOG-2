@@ -14,6 +14,7 @@
         <a class="dropdown-toggle" href="#">CATALOG <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="users.php?page=1">Users</a></li>
+          <li><a href="comments.php?page=1">Comments</a></li>
         	<li><a href="posts.php?page=1">Posts</a></li>
         	<li><a href="category.php?page=1">Categorii</a></li>
         </ul>
