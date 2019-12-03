@@ -1,7 +1,7 @@
 <?
 include 'functions/functions.php';
 
-$conn = mysqli_connect('localhost','root','','shop') or die('Database connection failed: '.mysqli_error());
+$conn = mysqli_connect('localhost','root','','blog') or die('Database connection failed: '.mysqli_error());
 
 $currency = ' $';
 $root = $_SERVER['DOCUMENT_ROOT'];
