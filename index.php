@@ -9,7 +9,18 @@ if(isset($_GET['logout'])){
 }
 include 'header.php';
 $page = 3;
-if(isset($_GET['comment']) && $_GET['comment'] == 'true'): 
+if(isset($_GET['category_id'])){
+
+  $max_query = mysqli_query($conn,"SELECT count(id) FROM posts WHERE category_id = '".$_GET['category_id']."'");
+
+  $max = mysqli_fetch_array($max_query);
+  $_SESSION['totalpage'] = ceil($max[0]/$page);
+  $start = ($_GET['page'] * $page) - $page;
+  $get_posts = mysqli_query($conn,"SELECT * FROM posts WHERE category_id = '".$_GET['category_id']."' LIMIT $start,$page");
+  $rowcount=mysqli_num_rows($get_posts);
+
+}
+if(isset($_GET['comment']) && $_GET['comment'] == 'true'):
     if(isset($_SESSION['username']) == false): ?>
     <script type="text/javascript">alert('You need to sign in!');</script>
         <?else: ?>                   
@@ -18,7 +29,6 @@ if(isset($_GET['comment']) && $_GET['comment'] == 'true'):
           Mesaj:
           <textarea class="form-control" rows="3" name="msg">
             
-
           </textarea>
           <br>
           <input type="submit" value="Comenteaza!" class="btn btn-primary submit">
@@ -30,49 +40,51 @@ if(isset($_GET['comment']) && $_GET['comment'] == 'true'):
 
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-    $cat_id = $_GET['category_id'];
-    $title = $_POST['titlu'];
-    $msg = $_POST['msg'];
+    $msg = mysqli_real_escape_string($conn,$_POST['msg']);
+    $post_id = mysqli_real_escape_string($conn,$_GET['post_id']);
+    // $query =  mysqli_query($conn,"UPDATE `posts` SET comment_ = '".$msg."', who_comment = '".$_SESSION['username']."' WHERE id = '".$post_id."'");
 
-    /*   echo "INSERT INTO `posts`(post_id,category_id,title,message,posted) VALUES('1' ,'". $cat_id."', '".$title."' ,'".$msg."', NOW())";*/
+    $query =  mysqli_query($conn,"INSERT INTO `comments`(post_id,comment,commented,who_comment) VALUES('".$post_id."','".$msg."',NOW(),'".$_SESSION['username']."')");
+    
 
+    if($query) {
 
+      echo'<p class="success-post">Your comment has been posted!</p>';
 
-    $query =  mysqli_query($conn,"INSERT INTO `posts`(user_who_posted,category_id,title,message,posted) VALUES('".$_SESSION['username']."' ,'". $cat_id."', '".$title."' ,'".$msg."', NOW())");
-
-    if($query) echo '<p class="success-post">Your comment has been posted!</p>';
+      
+     // $row_c = mysqli_fetch_array($query_comm);
+      // print_r($row_c);
+      // die();
+    } 
     else   echo 'eroare!';
 
 
   }
 
-endif;endif;; 
 
-if(isset($_GET['category_id'])){
 
-  $max_query = mysqli_query($conn,"SELECT count(id) FROM posts WHERE category_id = '".$_GET['category_id']."'");
+endif;endif; 
 
-  $max = mysqli_fetch_array($max_query);
-  $_SESSION['totalpage'] = ceil($max[0]/$page);
-  $start = ($_GET['page'] * $page) - $page;
-  $get_posts = mysqli_query($conn,"SELECT * FROM posts WHERE category_id = '".$_GET['category_id']."' LIMIT $start,$page");
-  $rowcount=mysqli_num_rows($get_posts);
-}
+
 include 'menu.php';
 
    if(isset($_GET['category_id'])): ?>
-     
+      
        <section class="container">
            <? 
            if($rowcount > 0):
                  while($row = mysqli_fetch_array($get_posts)): ?>
                 <div class="posts">
-
                   <p>Title: <?= $row['title']; ?></p>
                   <p>Message: <?= $row['message']; ?></p>
                   <p style="float:right;"><?= $row['user_who_posted'] . "<br> " .$row['posted']; ?></p>
                   <br>
-                  <a href="<?= $_SERVER['REQUEST_URI']; ?>&comment=true" class="addpost">Adaugati un comentariu!</a>
+                  <a href="<?= $_SERVER['REQUEST_URI']; ?>&comment=true&post_id=<?= $row['id'];?>" class="addpost">Adaugati un comentariu!</a>
+                  <?
+                    $query_comm = mysqli_query($conn,"SELECT * FROM `comments` WHERE post_id = '".$row['id']."'"); 
+                    while($row_c = mysqli_fetch_array($query_comm)): ?>
+                    <p><?= $row_c['comment'] . " - " . $row_c['who_comment'];?></p>
+                  <? endwhile;?>
                 </div> 
            <? endwhile;else: echo "Nu este nicio postare!";endif;?>
            
