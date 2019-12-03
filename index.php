@@ -43,7 +43,7 @@ if(isset($_GET['add']) && $_GET['add'] == 'true'):
 
     $query =  mysqli_query($conn,"INSERT INTO `posts`(user_who_posted,category_id,title,message,posted) VALUES('".$_SESSION['username']."' ,'". $cat_id."', '".$title."' ,'".$msg."', NOW())");
 
-    if($query) echo '<p class="success-post">comentul dvs a fost postat!</p>';
+    if($query) echo '<p class="success-post">Your comment has been posted!</p>';
     else   echo 'eroare!';
 
 
@@ -82,7 +82,7 @@ include 'menu.php';
               
                 
             <div class="pages">
-              <a href="?category_id=<?= $_GET['category_id']; ?>&page=<?= (($_GET['page']) % ($_SESSION['totalpage']+1) == 1) ? $_SESSION['totalpage'] : $_GET['page'] - 1; ?>"class="prev"><--</a> 
+              <a href="?category_id=<?= $_GET['category_id']; ?>&page=<?= (($_GET['page']) % ($_SESSION['totalpage']+1) == 1) ? $_SESSION['totalpage'] : $_GET['page'] - 1; ?>"class="prev"><--</a> &nbsp;&nbsp;&nbsp;&nbsp;
                <a href="?category_id=<?= $_GET['category_id']; ?>&page=<?= (($_GET['page'] + 1) % ($_SESSION['totalpage']+1) == 0) ? 1 : $_GET['page'] + 1; ?>">--></a>
 
                     <br>

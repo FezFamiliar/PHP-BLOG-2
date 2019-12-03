@@ -26,3 +26,11 @@ i:hover{cursor:pointer;opacity:0.2;}
 .add{color:white !important;}
 .submit{float:right;}
 .pull{text-align:right;}
+#post-table tr td{
+   max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap:break-word;
+
+
+}

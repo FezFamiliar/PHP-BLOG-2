@@ -78,12 +78,12 @@ if(isset($_GET['action']) && $_GET['action'] == 'remove'){
       </div>
     </div>
 
-    <table>
+    <table id="post-table">
       <tr>
         <th width=200><b>ID</b></th>
         <th width=300><b>Title</b></th>
-        <th width=200><b>Message</b></th>
-        <th width=500><b>Categorie</b></th>
+        <th width=300 style="max-width:300px"><b>Message</b></th>
+        <th width=200><b>Categorie</b></th>
         <th width=200><b>Action</b></th>
       </tr>
       <?
@@ -95,7 +95,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'remove'){
        <tr>
          <td><?= $row['id']; ?></td>
          <td><?= $row['title']; ?></td>
-         <td><?= $row['message']; ?></td>
+         <td style="width:30% !important"><?= $row['message']; ?></td>
          <td><?= $row_j['name']; ?></td>
          <td>
            &nbsp;&nbsp;&nbsp;
