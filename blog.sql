@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gazdă: 127.0.0.1
--- Timp de generare: dec. 03, 2019 la 02:45 PM
+-- Timp de generare: dec. 03, 2019 la 03:13 PM
 -- Versiune server: 10.4.8-MariaDB
 -- Versiune PHP: 7.1.33
 
@@ -39,7 +39,7 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `name`) VALUES
 (1, 'TVA'),
-(2, 'Impozitee'),
+(2, 'Impozite'),
 (3, 'Taxe'),
 (4, 'Curs Valutar'),
 (5, 'Credite');
@@ -74,7 +74,13 @@ INSERT INTO `posts` (`id`, `user_who_posted`, `category_id`, `title`, `message`,
 (9, 'Aarnduke', 4, 'a', '            \r\n\r\n          a', '2019-12-03 05:13:39'),
 (13, 'Aarnduke', 4, 'title', 'mesag            \r\n\r\n          ', '2019-12-03 05:27:53'),
 (14, 'Aarnduke', 4, 'dfdffdfd', '            dfdfdfdfddddddddddddddddddddddddddddddddddddddddddddddddddd\r\n\r\n          ', '2019-12-03 05:28:03'),
-(17, 'admin', 3, 'this is a message by admin', 'admin wwas here', '2019-12-03 05:36:31');
+(17, 'admin', 3, 'this is a message by admin', 'admin wwas here', '2019-12-03 05:36:31'),
+(19, 'Aarnduke', 1, 'ff', '            \r\nff\r\n          ', '2019-12-03 05:50:11'),
+(20, 'georgina', 5, 'ff', '            \r\nffff\r\n          ', '2019-12-03 05:54:05'),
+(21, 'georgina', 5, 'h', 'h', '2019-12-03 05:54:50'),
+(22, 'georgina', 5, 'h', 'h', '2019-12-03 05:55:59'),
+(23, 'georgina', 5, 'h', 'h', '2019-12-03 05:56:01'),
+(24, 'georgina', 5, 'h', 'h', '2019-12-03 05:57:05');
 
 -- --------------------------------------------------------
 
@@ -97,7 +103,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `joined`) VALUES
 (1, 'aarnduke', 'arrnduke@yahoo.com', 'a643249416814e8185957c158ec2c169', '2019-12-03 03:39:38'),
 (22, 'peter', 'peter@yahoo.com', 'f08e2a44ff938ba1fee15597f59e11eb', '2019-12-03 04:24:56'),
-(23, 'trump', 'trump@yahoo.com', '6ad5d29de368db3dcf6f9d8e133a223a', '2019-12-03 04:48:53');
+(23, 'trump', 'trump@yahoo.com', '6ad5d29de368db3dcf6f9d8e133a223a', '2019-12-03 04:48:53'),
+(25, 'georgina', 'georgina@yahoo.com', 'a643249416814e8185957c158ec2c169', '2019-12-03 05:53:47');
 
 --
 -- Indexuri pentru tabele eliminate
@@ -136,13 +143,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT pentru tabele `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT pentru tabele `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constrângeri pentru tabele eliminate
