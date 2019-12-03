@@ -1,9 +1,6 @@
 <?
 
 include 'config.php';
-
-//print_array($_SESSION);
-
 if(isset($_GET['logout'])){
 
   unset($_SESSION['username']);
@@ -12,8 +9,10 @@ if(isset($_GET['logout'])){
 }
 include 'header.php';
 $page = 3;
-if(isset($_GET['add']) && $_GET['add'] == 'true'): ?>
-
+if(isset($_GET['add']) && $_GET['add'] == 'true'): 
+    if(isset($_SESSION['username']) == false): ?>
+    <script type="text/javascript">alert('You need to sign in!');</script>
+        <?else: ?>                   
           <form action="" method="POST" autocomplete="off" class="comment-form">
           <br>
           Titlu:
@@ -44,13 +43,13 @@ if(isset($_GET['add']) && $_GET['add'] == 'true'): ?>
 
     $query =  mysqli_query($conn,"INSERT INTO `posts`(user_who_posted,category_id,title,message,posted) VALUES('".$_SESSION['username']."' ,'". $cat_id."', '".$title."' ,'".$msg."', NOW())");
 
-    if($query) echo 'comentul dvs a fost postat!';
+    if($query) echo '<p class="success-post">comentul dvs a fost postat!</p>';
     else   echo 'eroare!';
 
 
   }
 
-endif; 
+endif;endif;; 
 
 if(isset($_GET['category_id'])){
 
