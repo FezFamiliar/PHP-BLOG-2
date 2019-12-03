@@ -46,34 +46,21 @@ if(isset($_GET['category_id'])){
   $max = mysqli_fetch_array($max_query);
   $_SESSION['totalpage'] = ceil($max[0]/$page);
   $start = ($_GET['page'] * $page) - $page;
-  $product_query = mysqli_query($conn,"SELECT * FROM posts WHERE category_id = '".$_GET['category_id']."' LIMIT $start,$page");
+  $get_posts = mysqli_query($conn,"SELECT * FROM posts WHERE category_id = '".$_GET['category_id']."' LIMIT $start,$page");
+  $rowcount=mysqli_num_rows($get_posts);
 }
 include 'menu.php';
 
    if(isset($_GET['category_id'])): ?>
        <section class="container">
-           <? while($row = mysqli_fetch_array($product_query)): ?>
-             <div class="products" >
-               <div class="stock <?= ($row['stock'] > 0) ? 'on' : 'off' ?>">
-                <span><?= ($row['stock'] > 0) ? 'Pe stock' : 'Stock epuizat'?></span>
-               </div>
-               <form action="<?= $_SERVER['REQUEST_URI']; ?>&cart=true" method="POST">
-                  <a href="<?= $row['image'] ?>" data-lightbox="image"><img src="<?= $row['image'] ?>" width=200 height=200></a>
-                  <h2><?= $row['name']; ?></h2>
-                  <p><?= $row['description']; ?></p>
-                  <span><?= $row['price'] . $currency;?>
-                    <button type="submit" class="fake-button">
-                      <i class="fas fa-shopping-cart shopping-cart <? if($row['stock'] <= 0) echo 'disable'; ?>"></i>
-                    </button>
-                  </span>
-                  <input type="number" name="quantity" value="1" class="quantity">
-                  <input type="hidden" name="name" value="<?= $row['name']; ?>">
-                  <input type="hidden" name="description" value="<?= $row['description']; ?>">
-                  <input type="hidden" name="price" value="<?= $row['price']; ?>">
-                  <input type="hidden" name="id" value="<?= $row['id']; ?>">
-                </form>
+           <? 
+           if($rowcount > 0):
+                 while($row = mysqli_fetch_array($get_posts)): ?>
+                <div class="products">
+
+
              </div>
-           <? endwhile; ?>
+           <? endwhile;else: echo "Nu aveti nicio postare!";endif;?>
               <a href="?category_id=<?= $_GET['category_id']; ?>&page=<?= (($_GET['page'] + 1) % ($_SESSION['totalpage']+1) == 0) ? 1 : $_GET['page'] + 1; ?>">
                 <img src="lightbox/images/next.png" class="next">
               </a>
@@ -83,4 +70,5 @@ include 'menu.php';
                 <? endfor; ?>
             </div>
        </section>
- <? endif; ?>
+
+<? endif;?>
