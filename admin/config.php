@@ -3,7 +3,6 @@ include 'functions/functions.php';
 
 $conn = mysqli_connect('localhost','root','','blog') or die('Database connection failed: '.mysqli_error());
 
-$currency = ' $';
 $root = $_SERVER['DOCUMENT_ROOT'];
  ?>
  <!DOCTYPE html>

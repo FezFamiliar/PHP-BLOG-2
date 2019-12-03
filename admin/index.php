@@ -5,7 +5,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
   if(mysqli_real_escape_string($conn,$_POST['name']) == 'admin' && mysqli_real_escape_string($conn,$_POST['psw']) == 'abc'){
           $_SESSION['admin'] = 'admin';
-          header( "refresh:0;url=products.php?page=1");
+          header( "refresh:0;url=posts.php?page=1");
         }
   else
     echo "<script>alert('data incorecte')</script>";
