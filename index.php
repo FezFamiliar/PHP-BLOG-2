@@ -44,12 +44,9 @@ if(isset($_GET['add']) && $_GET['add'] == 'true'): ?>
 
     $query =  mysqli_query($conn,"INSERT INTO `posts`(user_who_posted,category_id,title,message,posted) VALUES('".$_SESSION['username']."' ,'". $cat_id."', '".$title."' ,'".$msg."', NOW())");
 
-    if($query){
-      echo 'comentul dvs a fost postat!';
-    }
-    else{    echo 'eroare!';
+    if($query) echo 'comentul dvs a fost postat!';
+    else   echo 'eroare!';
 
- }
 
   }
 
@@ -83,14 +80,14 @@ include 'menu.php';
                 </div> 
            <? endwhile;else: echo "Nu aveti nicio postare!";endif;?>
            
-  <!--             <a href="?category_id=<?= $_GET['category_id']; ?>&page=<?= (($_GET['page'] + 1) % ($_SESSION['totalpage']+1) == 0) ? 1 : $_GET['page'] + 1; ?>">
-                <img src="lightbox/images/next.png" class="next">
+               <a href="?category_id=<?= $_GET['category_id']; ?>&page=<?= (($_GET['page'] + 1) % ($_SESSION['totalpage']+1) == 0) ? 1 : $_GET['page'] + 1; ?>">
+                -->
               </a>
             <div class="pages">
                 <? for($i = 1; $i <= $_SESSION['totalpage']; $i++): ?>
                   <a href="?category_id=<?= $_GET['category_id']; ?>&page=<?= $i; ?>" class="<? if($_GET['page'] == $i) echo 'selected'; ?>"><?= $i; ?></a>
                 <? endfor; ?>
-            </div> -->
+            </div> 
        </section>
 
 <? endif;?>

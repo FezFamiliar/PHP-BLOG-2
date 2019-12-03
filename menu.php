@@ -8,10 +8,10 @@
           <a href="?category_id=<?= $row['id']; ?>&page=1" class="<? if(isset($_GET['category_id']) && $_GET['category_id'] == $row['id']) echo 'menu-highlight';?>"><?= $row['name']; ?></a>
         </li>
       <? endwhile; ?>
-<!--     <? if(isset($_GET['category_id'])): ?>
+     <? if(isset($_GET['category_id'])): ?>
       <a href="?category_id=<?= $_GET['category_id']; ?>&page=<?= (($_GET['page']) % ($_SESSION['totalpage']+1) == 1) ? $_SESSION['totalpage'] : $_GET['page'] - 1; ?>"class="prev">
-        <img src="lightbox/images/prev.png">
-      </a>
-    <? endif; ?> -->
+        <--
+      </a> 
+    <? endif; ?> 
   </ul>
 </div>
