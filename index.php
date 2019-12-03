@@ -7,6 +7,7 @@ include 'config.php';
 if(isset($_GET['logout'])){
 
   unset($_SESSION['username']);
+  unset($_SESSION['id']);
   header("refresh:0;url=index.php");
 }
 include 'header.php';
@@ -36,9 +37,12 @@ if(isset($_GET['add']) && $_GET['add'] == 'true'): ?>
     $cat_id = $_GET['category_id'];
     $title = $_POST['titlu'];
     $msg = $_POST['msg'];
+
     /*   echo "INSERT INTO `posts`(post_id,category_id,title,message,posted) VALUES('1' ,'". $cat_id."', '".$title."' ,'".$msg."', NOW())";*/
 
-    $query =  mysqli_query($conn,"INSERT INTO `posts`(post_id,category_id,title,message,posted) VALUES('1' ,'". $cat_id."', '".$title."' ,'".$msg."', NOW())");
+
+
+    $query =  mysqli_query($conn,"INSERT INTO `posts`(user_who_posted,category_id,title,message,posted) VALUES('".$_SESSION['username']."' ,'". $cat_id."', '".$title."' ,'".$msg."', NOW())");
 
     if($query){
       echo 'comentul dvs a fost postat!';
@@ -71,9 +75,11 @@ include 'menu.php';
                  while($row = mysqli_fetch_array($get_posts)): ?>
                 <div class="posts">
 
-                  <p><?= $row['title']; ?></p>
-                  <p><?= $row['message']; ?></p>
-                  <p><?= $row['posted']; ?></p>
+                  <p>Title: <?= $row['title']; ?></p>
+                  <p>Message: <?= $row['message']; ?></p>
+                  <p style="float:right;"><?= $row['user_who_posted'] . "<br> " .$row['posted']; ?></p>
+                  <br>
+  
                 </div> 
            <? endwhile;else: echo "Nu aveti nicio postare!";endif;?>
            

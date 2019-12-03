@@ -12,9 +12,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
   $query = "SELECT * FROM `users` WHERE username = '".$username."' AND password = '".md5($password)."'";
   $result = mysqli_query($conn,$query);
+  $row = mysqli_fetch_array($result);
+
   if(mysqli_num_rows($result) > 0){
 
     $_SESSION['username'] = $username;
+    $_SESSION['id'] = $row['id'];
     header("refresh:0;url=login.php");
 
   }else{
