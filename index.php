@@ -41,12 +41,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 if(isset($_GET['category_id'])){
 
-  $max_query = mysqli_query($conn,"SELECT count(id) FROM products WHERE category_id = '".$_GET['category_id']."'");
+  $max_query = mysqli_query($conn,"SELECT count(id) FROM posts WHERE category_id = '".$_GET['category_id']."'");
 
   $max = mysqli_fetch_array($max_query);
   $_SESSION['totalpage'] = ceil($max[0]/$page);
   $start = ($_GET['page'] * $page) - $page;
-  $product_query = mysqli_query($conn,"SELECT * FROM products WHERE category_id = '".$_GET['category_id']."' LIMIT $start,$page");
+  $product_query = mysqli_query($conn,"SELECT * FROM posts WHERE category_id = '".$_GET['category_id']."' LIMIT $start,$page");
 }
 include 'menu.php';
 
@@ -83,13 +83,4 @@ include 'menu.php';
                 <? endfor; ?>
             </div>
        </section>
-        <div class="slide-container">
-          <form action="range.php" method="POST" autocomplete="off">
-            <p>Filter by price:</p>
-            <input type="text" name="range-price" readonly id="amount" value="100">
-            <input type="submit" value="<?= $lang['filter']; ?>">
-          </form>
-        </div>
-  <div id="slider-range"></div>
-
  <? endif; ?>

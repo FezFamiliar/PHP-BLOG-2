@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
 
-
+  console.log('f');
   $('.shopping-cart').click(function(){
       $.get('ajax/cart.php');
 
@@ -98,35 +98,5 @@ $(document).ready(function(){
 
           }
         })
-
-
-
-     
-        $('#slider').mousedown(function(){
-            var slide = $(this).val();
-            var output = $('.slide-container span');
-            output.html(slide);
-
-            $('#slider').on('input',function(){
-
-                output.html($(this).val())
-            })
-
-          });
-
-          $(function() {
-            $( "#slider-range" ).slider({
-              range: true,
-              min: 0,
-              max: 500,
-              values: [ 75, 300 ],
-              slide: function( event, ui ) {
-                $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-              }
-            });
-            $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-              " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-          } );
-
 
 })
